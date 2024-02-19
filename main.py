@@ -2,16 +2,13 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.controller.auth_controller import auth_router
 from src.controller.password_controller import router
 
-# from src.middleware.auth_middleware import check_token_status
-
-app = FastAPI(title="Password Manager", version='1.0.0' ,description='')
+app = FastAPI(title="Password Manager", version='1.0.0', description='')
 
 app.include_router(router)
-
-# app.middleware("http")(check_token_status)
-
+app.include_router(auth_router)
 
 app.add_middleware(
     CORSMiddleware,
