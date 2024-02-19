@@ -1,5 +1,5 @@
 from sqlalchemy import URL, create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 from src.env_config import USERNAME, PASSWORD, HOST, DATABASE
 
@@ -14,3 +14,5 @@ connection_string = URL.create(
 engine = create_engine(connection_string)
 Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 session = Session()
+
+Base = declarative_base()

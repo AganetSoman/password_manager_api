@@ -1,17 +1,16 @@
 from sqlalchemy import Column, String, Integer, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
 
-Base = declarative_base()
+from src.config.db_connection import Base
+from src.entity.base_mixin import BaseMixin
 
 
-class Credential(Base):
+class Credential(Base, BaseMixin):
     __tablename__ = "credentials"
 
-    credential_id = Column(Integer, primary_key=True,autoincrement=True)
-    app_name = Column(String)
-    username = Column(String)
-    password = Column(String)
-    user_id = Column(Integer, ForeignKey('users.user_id'))
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    app_name = Column(String, nullable=False)
+    username = Column(String, nullable=False)
+    password = Column(String, nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'))
 
-    user = relationship("User", back_populates="credentials")
+    # user = relationship("User", back_populates="credentials")
